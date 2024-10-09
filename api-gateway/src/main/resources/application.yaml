@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: department-service
+          uri: lb:http://DEPARTMENT-SERVICE
+          predicates:
+            - Path=/api/v1/department/**
+
+        - id: employee-service
+          uri: lb:http://EMPLOYEE-SERVICE
+          predicates:
+            - Path=/api/v1/employee/**
+
+server:
+  port: 8082
+  forward-headers-strategy: framework

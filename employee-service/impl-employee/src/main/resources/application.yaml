@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: employee-service
+
+  datasource:
+    username: postgres
+    password: postgre1488rp
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/company
+
+  liquibase:
+    default-schema: employees
+    change-log: file:employee-service/db-employee/src/main/resources/db/changelog/db.changelog-master.yaml
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: TIME_BASED
+        slidingWindowSize: 15
+        minimumNumberOfCalls: 10
+        failureRateThreshold: 100
+        waitDurationInOpenState: 6000
+        permittedNumberOfCallsInHalfOpenState: 3
+        eventConsumerBufferSize: 50
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+preliquibase:
+  sql-script-references: file:employee-service/db-employee/src/main/resources/preliquibase/postgresql.sql
+

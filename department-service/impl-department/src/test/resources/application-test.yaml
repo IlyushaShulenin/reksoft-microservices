@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    password: test
+    username: test
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+preliquibase:
+  sql-script-references: classpath:preliquibase/postgresql.sql

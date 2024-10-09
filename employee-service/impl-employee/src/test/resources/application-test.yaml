@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: test
+    username: test
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+#  liquibase:
+#    default-schema: employees
+#    change-log: file:employee-service/db-employee/src/main/resources/db/changelog/db.changelog-master.yaml
+#
+preliquibase:
+  sql-script-references: classpath:preliquibase/postgresql.sql

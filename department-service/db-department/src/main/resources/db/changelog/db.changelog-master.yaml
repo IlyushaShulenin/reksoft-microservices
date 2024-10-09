@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-1.0.sql
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-2.0.sql
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-3.0.sql
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-3.1.sql
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-3.2.sql
+  - include:
+      file: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-4.0.sql

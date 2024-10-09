@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: department-service
+
+  profiles:
+    active: test
+
+  datasource:
+    username: postgres
+    password: postgre1488rp
+    url: jdbc:postgresql://localhost:5432/company
+    driver-class-name: org.postgresql.Driver
+
+
+  liquibase:
+    default-schema: departments
+    change-log: file:department-service/db-department/src/main/resources/db/changelog/db.changelog-master.yaml
+
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+resilience4j:
+    circuitbreaker:
+      configs:
+        default:
+          registerHealthIndicator: true
+          slidingWindowType: TIME_BASED
+          slidingWindowSize: 15
+          minimumNumberOfCalls: 10
+          failureRateThreshold: 100
+          waitDurationInOpenState: 6000
+          permittedNumberOfCallsInHalfOpenState: 3
+          eventConsumerBufferSize: 50
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+server:
+  port: 8080
+
+preliquibase:
+  sql-script-references: file:department-service/db-department/src/main/resources/preliquibase/postgresql.sql
