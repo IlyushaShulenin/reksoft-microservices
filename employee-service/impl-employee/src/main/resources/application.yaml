@@ -12,6 +12,15 @@ spring:
     default-schema: employees
     change-log: file:employee-service/db-employee/src/main/resources/db/changelog/db.changelog-master.yaml
 
+  boot:
+    admin:
+      client:
+        url: http://localhost:8083
+        instance:
+          name: ${spring.application.name}
+          service-host-type: ip
+        enabled: true
+
   cloud:
     openfeign:
       circuitbreaker:
@@ -43,3 +52,19 @@ eureka:
 preliquibase:
   sql-script-references: file:employee-service/db-employee/src/main/resources/preliquibase/postgresql.sql
 
+management:
+  endpoints.web.exposure.include: 'prometheus, health'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+#    zipkin:
+#      tracing:
+#        endpoint: http://127.0.0.1:9411/api/v2/spans
+#    tracing:
+#      sampling:
+#        probability: 1.0

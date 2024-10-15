@@ -16,7 +16,7 @@ import ru.shulenin.api.dto.EmployeeEditDto;
 import ru.shulenin.api.dto.EmployeeReadDto;
 import ru.shulenin.api.dto.EmployeeSaveDto;
 import ru.shulenin.api.service.EmployeeService;
-
+import ru.shulenin.impl.aspect.annotation.DurationCount;
 
 @Tag(name = "Employee API")
 @RestController
@@ -36,6 +36,7 @@ public class EmployeeRestControllerImpl implements EmployeeRestController {
     }
 
     @Override
+    @DurationCount
     public ResponseEntity<EmployeeReadDto> saveEmployee(
             @RequestBody @Valid @Parameter(description = "Save DTO") EmployeeSaveDto employeeSaveDto
     ) {
